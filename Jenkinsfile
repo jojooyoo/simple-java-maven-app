@@ -32,7 +32,9 @@ spec:
 		
 		stage('Test') {
             steps {
-                sh 'mvn test'
+                container('maven386jdk11') {
+                    sh 'mvn test'
+                }
             }
             post {
                 always {
