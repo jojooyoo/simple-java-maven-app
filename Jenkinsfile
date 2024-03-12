@@ -36,7 +36,7 @@ parameters{
                 }
             }
         }
-	if (parameters.runtest)	{
+	if (parameters.runtest == true)	{
 
 		stage('Test') {
             steps {
@@ -52,7 +52,7 @@ parameters{
         }
     }    
 
-    if (parameters.rundeliver) {
+    if (parameters.rundeliver == true) {
 
         stage('Deliver') {
              steps {
