@@ -1,5 +1,26 @@
 pipeline {
-    agent kubernetes
+    agent {
+        kubernetes {
+            yaml """
+apiVersion: v1
+kind: Pod
+metadata:
+spec:
+  containers:           
+    - name: maven386jdk11
+      image: maven:3.8.6-jdk-11
+      command: [ 'cat' ]
+      tty: true
+      resources:
+        requests:
+          memory: "1024Mi"
+          cpu: "500m"
+        limits:
+          memory: "1024Mi"
+          cpu: "500m"
+"""
+        }
+    }
     stages {
         stage('Build') { 
             steps {
