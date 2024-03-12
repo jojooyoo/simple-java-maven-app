@@ -45,7 +45,9 @@ spec:
 
         stage('Deliver') {
              steps {
-               sh './jenkins/scripts/deliver.sh'
+                container('maven386jdk11') {
+                    sh './jenkins/scripts/deliver.sh'
+                }
             }
         }
     }
