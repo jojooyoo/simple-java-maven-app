@@ -24,7 +24,9 @@ spec:
     stages {
         stage('Build') { 
             steps {
-                sh 'mvn -B -DskipTests clean package' 
+                container('maven386jdk11') {
+                    sh 'mvn -B -DskipTests clean package' 
+                }
             }
         }
 		
