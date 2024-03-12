@@ -21,6 +21,13 @@ spec:
 """
         }
     }
+
+parameters{
+    booleanParam(defaultValue: false, description: "run test?", name: "runtest")
+    booleanParam(defaultValue: false, description: "run deliver?", name: "rundeliver")
+}
+
+
     stages {
         stage('Build') { 
             steps {
@@ -29,7 +36,8 @@ spec:
                 }
             }
         }
-		
+	if (parameters.runtest)	{
+
 		stage('Test') {
             steps {
                 container('maven386jdk11') {
@@ -42,6 +50,9 @@ spec:
                 }
             }
         }
+    }    
+
+    if (parameters.rundeliver) {
 
         stage('Deliver') {
              steps {
@@ -50,5 +61,7 @@ spec:
                 }
             }
         }
+    }
+
     }
 }
