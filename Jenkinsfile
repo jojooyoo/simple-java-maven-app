@@ -36,9 +36,11 @@ parameters{
                 }
             }
         }
-	if (params.runtest == true)	{
 
 		stage('Test') {
+            when {
+                expression { params.runtest == true }
+            }
             steps {
                 container('maven386jdk11') {
                     sh 'mvn test'
@@ -50,18 +52,16 @@ parameters{
                 }
             }
         }
-    }    
-
-    if (params.rundeliver == true) {
 
         stage('Deliver') {
-             steps {
+            when {
+                expression { params.rundeliver == true }
+            }
+            steps {
                 container('maven386jdk11') {
                     sh './jenkins/scripts/deliver.sh'
                 }
             }
         }
-    }
-
     }
 }
